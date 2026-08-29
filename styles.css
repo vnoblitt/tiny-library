@@ -1,0 +1,49 @@
+.bookshelf {
+    display: grid;
+    width: 70vw;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+}
+
+.book {
+    box-sizing: border-box;
+    
+    height: 300px;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    text-align: center;
+    padding: 50px;
+    gap: 10px;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.blank {
+    border: 5px dotted black;
+}
+
+.book .author {
+    font-style: italic;
+}
+
+/* I hate the way this looks. 
+
+.author::before {
+    content: "By: ";
+}
+*/
+
+#add-book {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 0;
+    border-radius: 8px;
+    background-color: black;
+    color: white;
+}
