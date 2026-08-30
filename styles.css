@@ -1,8 +1,44 @@
-.bookshelf {
+body {
+    padding: 20px;
+    padding-top: 0px;
+}
+
+#bookshelf {
     display: grid;
     width: 70vw;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+}
+
+.add-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 2rem;
+}
+
+#add-form {
+    display: grid;
+    grid-template-columns: 50px minmax(10%, 300px);
+    align-items: center;
+    gap: 8px;
+}
+
+#form-read {
+    justify-self: start;
+}
+
+.form-container,
+#book-info{
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 20px;
+    width: 25%;
+}
+
+.supercontainer {
+    display: flex;
+    gap: 20px;
 }
 
 .book {
@@ -10,7 +46,7 @@
     
     height: 300px;
     width: 200px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 8px;
 
     display: flex;
@@ -21,22 +57,16 @@
     gap: 10px;
     overflow-wrap: break-word;
     hyphens: auto;
+    margin-top: 20px;
 }
 
-.blank {
-    border: 5px dotted black;
+.book.unread {
+    border: 2px solid red;
 }
 
 .book .author {
     font-style: italic;
 }
-
-/* I hate the way this looks. 
-
-.author::before {
-    content: "By: ";
-}
-*/
 
 #add-book {
     margin-top: 10px;
@@ -47,3 +77,10 @@
     background-color: black;
     color: white;
 }
+
+/* I hate the way this looks. 
+
+.author::before {
+    content: "By: ";
+}
+*/
