@@ -16,7 +16,7 @@ const bookOne = document.getElementById('book-one');
 const bookTwo = document.getElementById('book-two');
 const bookThree = document.getElementById('book-three');
 
-const library = [];
+let library = [];
 
 addButton.addEventListener('click', () => {
     library.push(addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, formRead.checked));
@@ -26,11 +26,11 @@ addButton.addEventListener('click', () => {
     formRead.checked = false;
 });
 
-/* -----------------------------------------------
+/* ----------------------------------------------- */
 testButton.addEventListener('click', () => {
-    bookInfo.innerText = 'test';
+    console.log(viewLibrary());
 });
--------------------------------------------------*/
+/* ------------------------------------------------- */
 bookshelf.addEventListener('click', () => {
     if (event.target && event.target.matches('.book')) {
         const targetID = event.target.id;
@@ -45,6 +45,13 @@ function Book(title, author, pages, read, id) {
     this.pages = pages;
     this.read = read;
     this.id = id;
+}
+
+function setupLibrary(){
+    library.push(addBookToLibrary('Infinite Jest', 'David Foster Wallace', 1079, false));
+    library.push(addBookToLibrary('The Lathe of Heaven', 'Ursula K LeGuin', 192, true));
+    library.push(addBookToLibrary('The Scarlet Letter', 'Nathaniel Hawthorne', 272, true));
+    return library;
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -84,8 +91,26 @@ function updateInfoCard(Book) {
     author.textContent = `By: ${Book.author}`;
     pages.textContent = `${Book.pages} pages`;
     bookInfo.append(title, author, pages);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
+    deleteButton.textContent = 'Delete';
+    bookInfo.append(deleteButton);
+
+    deleteButton.addEventListener('click', () => {
+        removeFromLibrary(Book.id);
+        const child = document.getElementById(Book.id);
+        bookshelf.removeChild(child);
+        bookInfo.innerText = 'Fill out the form and submit books to add them to the library.';
+    });
 }
 
 function viewLibrary() {
     return library;
 }
+
+function removeFromLibrary(targetID) {
+    library = library.filter(book => book.id !== targetID);
+}
+
+console.log(setupLibrary());
