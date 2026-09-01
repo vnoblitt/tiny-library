@@ -1,4 +1,5 @@
 const addButton = document.getElementById('add-book');
+
 /* See the comment on on addForm.innerHTML -------------
 const addForm = document.getElementById('add-form'); */
 
@@ -24,6 +25,8 @@ addButton.addEventListener('click', () => {
     formAuthor.value = '';
     formPages.value = '';
     formRead.checked = false;
+    const dialogue  = document.getElementById('form-dialogue');
+    dialogue.close();
 });
 
 /* ----------------------------------------------- */
@@ -31,12 +34,19 @@ testButton.addEventListener('click', () => {
     console.log(viewLibrary());
 });
 /* ------------------------------------------------- */
-bookshelf.addEventListener('click', () => {
-    if (event.target && event.target.matches('.book')) {
-        const targetID = event.target.id;
-        const targetBook = library.find(book => book.id === targetID);
-        updateInfoCard(targetBook);
-    }
+document.addEventListener('click', (event) => {
+    const clicked = event.target.closest('.book')
+    if(!clicked && !event.target.closest('#book-info')) resetBookInfo();
+});
+
+bookshelf.addEventListener('click', (event) => {
+    const clickedBook = event.target.closest('.book');
+    if(!clickedBook) return;
+
+    const targetID = clickedBook.id;
+    const targetBook = library.find(book => book.id === targetID);
+    if (targetBook) updateInfoCard(targetBook);
+    
 });
 
 function Book(title, author, pages, read, id) {
@@ -103,6 +113,13 @@ function updateInfoCard(Book) {
         bookshelf.removeChild(child);
         bookInfo.innerText = 'Fill out the form and submit books to add them to the library.';
     });
+}
+
+function resetBookInfo() {
+    bookInfo.innerHTML = `
+        <p>Click the plus button to add books to the library.</p>
+        <p>Click on a book's cover to view information about it.</p>
+           ` 
 }
 
 function viewLibrary() {

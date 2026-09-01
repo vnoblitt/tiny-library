@@ -11,7 +11,10 @@
     <h1>Welcome to the library!</h1>
     
     <div class="supercontainer">
-        <div class="form-container">
+        
+        <button command="show-modal" commandfor="form-dialogue" id="show-modal">+</button>
+
+        <dialog id="form-dialogue">
             <form id="add-form">
                 <label for="form-title">Title</label>
                 <input id="form-title" name="form-title" type="text"/>
@@ -26,10 +29,15 @@
                 <input id="form-read" name="form-read" type="checkbox"/>
             </form>
             <button type="button" id="add-book">Add Book</button>
-        </div>
+            <button commandfor="form-dialogue" command="close">Close</button>
+        </dialog>
+
         <div id="book-info">
-            Fill out the form and submit books to add them to the library.
+           <p>Click the plus button to add books to the library.</p>
+           <p>Click on a book's cover to view information about it.</p>
         </div>
+    </div>
+        
     </div>
     <h2>Select a book:</h2>
     <div id="bookshelf">
