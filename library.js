@@ -92,15 +92,40 @@ function addBookToShelf(Book) {
     bookshelf.append(newBook);
 }
 
+function updateShelf(Book) {
+    const targetDiv = document.getElementById(Book.id);
+    if(targetDiv.classList.contains('read')) {
+        targetDiv.classList.remove('read');
+        targetDiv.classList.add('unread');
+    } else {
+        targetDiv.classList.remove('unread');
+        targetDiv.classList.add('read');
+    }
+}
+
 function updateInfoCard(Book) {
     bookInfo.innerText = '';
     const title = document.createElement('p');
     const author = document.createElement('p');
     const pages = document.createElement('p');
+
+    const changeRead = document.createElement('button');
+    if (Book.read) {
+        changeRead.textContent = 'Change to unread';
+    } else {
+        changeRead.textContent = 'Change to read';
+    }
+
+    changeRead.addEventListener('click', () => {
+        changeReadStatus(Book);
+        updateInfoCard(Book);
+        updateShelf(Book);
+    });
+
     title.textContent = Book.title;
     author.textContent = `By: ${Book.author}`;
     pages.textContent = `${Book.pages} pages`;
-    bookInfo.append(title, author, pages);
+    bookInfo.append(title, author, pages, changeRead);
 
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-button');
@@ -124,6 +149,11 @@ function resetBookInfo() {
 
 function viewLibrary() {
     return library;
+}
+
+function changeReadStatus(Book) {
+    Book.read = !Book.read;
+    return Book;
 }
 
 function removeFromLibrary(targetID) {
