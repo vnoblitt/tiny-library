@@ -6,14 +6,21 @@
     <title>Tiny Library</title>
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="library.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luxurious+Script&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Welcome to the library!</h1>
-    
+
+    <div class="header">
+        <h1>Tiny Library</h1>
+    </div>
+
     <div class="supercontainer">
         
-        <button command="show-modal" commandfor="form-dialogue" id="show-modal">+</button>
-
         <dialog id="form-dialogue">
             <form id="add-form">
                 <label for="form-title">Title</label>
@@ -28,22 +35,28 @@
                 <label for="form-read">Read?</label>
                 <input id="form-read" name="form-read" type="checkbox"/>
             </form>
+            
             <button type="button" id="add-book">Add Book</button>
             <button commandfor="form-dialogue" command="close">Close</button>
+            
         </dialog>
 
         <div id="book-info">
            <p>Click the plus button to add books to the library.</p>
            <p>Click on a book's cover to view information about it.</p>
         </div>
+
+        <button command="show-modal" commandfor="form-dialogue" id="show-modal">+</button>
     </div>
-        
-    </div>
-    <h2>Select a book:</h2>
-    <div id="bookshelf">
+    
+    <div class="shelf-container">
+        <h2>Select a book:</h2>
+
+        <div id="bookshelf"></div>
     </div>
    
-    <button type="button" id="overwrite">test</button>  
+    <div class="footer">Copyright &copy V Noblitt 2026</div>
+<!--    <button type="button" id="overwrite">test</button>  -->
 
 </body>
 </html>

@@ -29,11 +29,11 @@ addButton.addEventListener('click', () => {
     dialogue.close();
 });
 
-/* ----------------------------------------------- */
+/* -----------------------------------------------/
 testButton.addEventListener('click', () => {
     console.log(viewLibrary());
 });
-/* ------------------------------------------------- */
+ ------------------------------------------------- */
 document.addEventListener('click', (event) => {
     const clicked = event.target.closest('.book')
     if(!clicked && !event.target.closest('#book-info')) resetBookInfo();
@@ -108,29 +108,33 @@ function updateInfoCard(Book) {
     const title = document.createElement('p');
     const author = document.createElement('p');
     const pages = document.createElement('p');
-
+    const deleteButton = document.createElement('button');
     const changeRead = document.createElement('button');
+    const buttonContainer = document.createElement('div')
+    buttonContainer.classList.add('button-container');
+
     if (Book.read) {
         changeRead.textContent = 'Change to unread';
     } else {
         changeRead.textContent = 'Change to read';
     }
-
-    changeRead.addEventListener('click', () => {
-        changeReadStatus(Book);
-        updateInfoCard(Book);
-        updateShelf(Book);
-    });
-
     title.textContent = Book.title;
     author.textContent = `By: ${Book.author}`;
     pages.textContent = `${Book.pages} pages`;
-    bookInfo.append(title, author, pages, changeRead);
-
-    const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-button');
     deleteButton.textContent = 'Delete';
-    bookInfo.append(deleteButton);
+
+    buttonContainer.append(deleteButton, changeRead)
+    bookInfo.append(title, author, pages, buttonContainer);
+
+    
+
+
+    changeRead.addEventListener('click', () => {
+            changeReadStatus(Book);
+            updateInfoCard(Book);
+            updateShelf(Book);
+        });
 
     deleteButton.addEventListener('click', () => {
         removeFromLibrary(Book.id);
