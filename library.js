@@ -1,7 +1,6 @@
 const addButton = document.getElementById('add-book');
-
-/* See the comment on on addForm.innerHTML -------------
-const addForm = document.getElementById('add-form'); */
+const dialog = document.getElementById('form-dialogue');
+const showModalButton = document.getElementById('show-modal');
 
 const formTitle = document.getElementById('form-title');
 const formAuthor = document.getElementById('form-author');
@@ -9,15 +8,13 @@ const formPages = document.getElementById('form-pages');
 const formRead = document.getElementById('form-read');
 
 const bookInfo = document.getElementById('book-info');
-// Delete this later --------------
-const testButton = document.getElementById('overwrite');
-// --------------------------------
 const bookshelf = document.getElementById('bookshelf');
-const bookOne = document.getElementById('book-one');
-const bookTwo = document.getElementById('book-two');
-const bookThree = document.getElementById('book-three');
 
 let library = [];
+
+showModalButton.addEventListener('click', () => {
+    dialog.showModal();
+});
 
 addButton.addEventListener('click', () => {
     library.push(addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, formRead.checked));
@@ -29,11 +26,6 @@ addButton.addEventListener('click', () => {
     dialogue.close();
 });
 
-/* -----------------------------------------------/
-testButton.addEventListener('click', () => {
-    console.log(viewLibrary());
-});
- ------------------------------------------------- */
 document.addEventListener('click', (event) => {
     const clicked = event.target.closest('.book')
     if(!clicked && !event.target.closest('#book-info')) resetBookInfo();
@@ -49,13 +41,15 @@ bookshelf.addEventListener('click', (event) => {
     
 });
 
-function Book(title, author, pages, read, id) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.id = id;
-}
+class Book {
+    constructor(title, author, pages, read, id) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.id = id;
+    }
+    }
 
 function setupLibrary(){
     library.push(addBookToLibrary('Infinite Jest', 'David Foster Wallace', 1079, false));
