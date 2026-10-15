@@ -16,14 +16,17 @@ showModalButton.addEventListener('click', () => {
     dialog.showModal();
 });
 
-addButton.addEventListener('click', () => {
-    library.push(addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, formRead.checked));
-    formTitle.value = '';
-    formAuthor.value = '';
-    formPages.value = '';
-    formRead.checked = false;
-    const dialogue  = document.getElementById('form-dialogue');
-    dialogue.close();
+
+addButton.addEventListener('click', () => {    
+    if(checkValidity) {
+        library.push(addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, formRead.checked));
+        formTitle.value = '';
+        formAuthor.value = '';
+        formPages.value = '';
+        formRead.checked = false;
+        const dialogue  = document.getElementById('form-dialogue');
+        dialogue.close();
+    }
 });
 
 document.addEventListener('click', (event) => {
@@ -49,7 +52,14 @@ class Book {
         this.read = read;
         this.id = id;
     }
-    }
+}
+
+function checkValidity() {
+    let valid = (formTitle.validity.valid && 
+        formAuthor.validity.valid && 
+        formPages.validity.valid);
+    return valid;
+}
 
 function setupLibrary(){
     library.push(addBookToLibrary('Infinite Jest', 'David Foster Wallace', 1079, false));

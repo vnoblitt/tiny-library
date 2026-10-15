@@ -188,3 +188,13 @@ button {
     align-items: center;
     
 }
+
+span .error {
+    color: red;
+}
+
+#form-title:invalid,
+#form-author:invalid,
+#form-pages:invalid {
+    border: 2px solid red;
+}
